@@ -1,6 +1,7 @@
 # M5StickCPlus Temperature and Humidity Display
 
-This project demonstrates how to use an M5StickCPlus and a DHT22 sensor to display temperature and humidity data on the M5StickCPlus screen.
+This project demonstrates how to use an M5StickCPlus and a DHT22 sensor to display temperature and humidity data on the M5StickCPlus screen, and send the data to a Blynk app using virtual pins V0 and V1. The project uses PlatformIO for development and deployment.
+
 
 ## Hardware Requirements
 - M5StickCPlus
