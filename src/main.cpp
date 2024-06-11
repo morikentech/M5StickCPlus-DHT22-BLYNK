@@ -1,7 +1,7 @@
 #define BLYNK_TEMPLATE_ID "YOUR_TEMPLATE_ID"
 #define BLYNK_TEMPLATE_NAME "YOUR_TEMPLATE_NAME"
 
-#include <M5StickCPlus.h>
+#include <M5Unified.h>
 #include <DHT.h>
 #include <WiFi.h>
 #include <BlynkSimpleEsp32.h>
@@ -19,6 +19,7 @@ BlynkTimer timer;
 
 void sendSensorData()
 {
+
   float h = dht.readHumidity();
   float t = dht.readTemperature();
 
@@ -35,21 +36,22 @@ void sendSensorData()
   // Serial.printf("Temp: %.1f C, Hum: %.1f %%\n", t, h);
 
   // M5StickCの画面に表示
-  M5.Lcd.fillScreen(BLACK);
-  M5.Lcd.setCursor(0, 0);
-  M5.Lcd.setTextSize(2);
-  M5.Lcd.setTextColor(WHITE);
-  M5.Lcd.printf("Temp: %.1f C\n", t);
-  M5.Lcd.printf("Hum: %.1f %%\n", h);
+  M5.Display.fillScreen(BLACK);
+  M5.Display.setCursor(0, 0);
+  M5.Display.setTextSize(2);
+  M5.Display.setTextColor(WHITE);
+  M5.Display.printf("Temp: %.1f C\n", t);
+  M5.Display.printf("Hum: %.1f %%\n", h);
 }
-
 void setup()
 {
-  M5.begin();
+  auto cfg = M5.config();
+  cfg.serial_baudrate = 115200;
+  cfg.output_power = true;
+  M5.begin(cfg);
   dht.begin();
-  M5.Lcd.begin();
-  M5.Lcd.setRotation(1);
-  M5.Lcd.fillScreen(BLACK); // 初期画面を黒に設定
+  M5.Display.setRotation(1);
+  M5.Display.fillScreen(BLACK); // 初期画面を黒に設定
   Serial.begin(115200);
 
   WiFi.begin(ssid, pass);
